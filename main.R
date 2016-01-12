@@ -27,21 +27,20 @@ prj_string_RD <- CRS("+proj=sterea +lat_0=52.15616055555555 +lon_0=5.38763888888
 bufferRail <- gBuffer(railRD, byid=TRUE, width=1000)
 
 #intersect the buffer with cities
-
+intersect <- (gIntersection(placesRD, bufferRail, byid=TRUE))
 row.names(gIntersection(placesRD, bufferRail, byid=TRUE))
-intersect <- strsplit(row.names(gIntersection(placesRD, bufferRail, byid=TRUE)), split = ' ')
+intersectstring <- strsplit(row.names(gIntersection(placesRD, bufferRail, byid=TRUE)), split = ' ')
 citycode <- as.numeric(intersect[[1]][1])
 #Create a plot that shows the buffer, the points, and the name of the city
 plot(bufferRail)
 plot(intersect, add=TRUE) 
 #add labels to plot and maybe visualize
-text(placesRD, labels=as.character(placesRD$name), cex=0.6, font=2)
+text(placesRD[citycode,], labels=as.character(placesRD[citycode,]$name), cex=0.6, font=2)
+
 
 #write down the name of the city and the population of that city as one comment at the end of the script.
-pop <- (paste("Population =", placesRD[5973,]$population))
-paste("Population =", placesRD[5973,]$population)
-paste("Cityname =", placesRD[5973,]$name)
-
+paste("Cityname =", placesRD[citycode,]$name)
+paste("Population =", placesRD[citycode,]$population)
 
 
 
