@@ -31,11 +31,11 @@ bufferRail <- gBuffer(railRD, byid=TRUE, width=1000)
 row.names(gIntersection(placesRD, bufferRail, byid=TRUE))
 intersect <- strsplit(row.names(gIntersection(placesRD, bufferRail, byid=TRUE)), split = ' ')
 citycode <- as.numeric(intersect[[1]][1])
-
 #Create a plot that shows the buffer, the points, and the name of the city
 plot(bufferRail)
-plot(intersect, add=TRUE)
+plot(intersect, add=TRUE) 
 #add labels to plot and maybe visualize
+text(placesRD, labels=as.character(placesRD$name), cex=0.6, font=2)
 
 #write down the name of the city and the population of that city as one comment at the end of the script.
 pop <- (paste("Population =", placesRD[5973,]$population))
